@@ -823,6 +823,31 @@ extern "C" {
     #[doc = " See also `ts_parser_set_language`."]
     pub fn ts_language_version(arg1: *const TSLanguage) -> u32;
 }
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct TSWasmEngine {
+    _unused: [u8; 0],
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct TSWasmContext {
+    _unused: [u8; 0],
+}
+extern "C" {
+    pub fn ts_wasm_context_new(engine: *mut TSWasmEngine) -> *mut TSWasmContext;
+}
+extern "C" {
+    pub fn ts_wasm_context_delete(arg1: *mut TSWasmContext);
+}
+extern "C" {
+    pub fn ts_wasm_context_load_language(
+        context: *mut TSWasmContext,
+        name: *const ::std::os::raw::c_char,
+        name_len: u32,
+        wasm: *const ::std::os::raw::c_char,
+        wasm_len: u32,
+    ) -> *const TSLanguage;
+}
 extern "C" {
     #[doc = " Set the allocation functions used by the library."]
     #[doc = ""]

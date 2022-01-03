@@ -896,6 +896,23 @@ TSSymbolType ts_language_symbol_type(const TSLanguage *, TSSymbol);
  */
 uint32_t ts_language_version(const TSLanguage *);
 
+#ifdef TREE_SITTER_FEATURE_WASM
+
+typedef struct TSWasmEngine TSWasmEngine;
+typedef struct TSWasmContext TSWasmContext;
+
+TSWasmContext *ts_wasm_context_new(TSWasmEngine *engine);
+void ts_wasm_context_delete(TSWasmContext *);
+const TSLanguage *ts_wasm_context_load_language(
+  TSWasmContext *context,
+  const char *name,
+  uint32_t name_len,
+  const char *wasm,
+  uint32_t wasm_len
+);
+
+#endif
+
 /**********************************/
 /* Section - Global Configuration */
 /**********************************/
